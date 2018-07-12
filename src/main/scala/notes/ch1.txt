@@ -1,0 +1,39 @@
+CHAPTER 1:
+
+Type classes - allow us to extend existing libraries with new functionality without using traditional inheritance
+Three components:
+1) Type class,
+2) instances for particular types,
+3) interface methods we expose to users
+
+Type Class
+A type class is an interface or API that represents some functionality we want to implement
+In Cats, type class represented by a trait with at least one type parameter
+
+Type Class Instances
+The instances of a type class provide implementations for the types we care about
+We define instances by creating concrete implementations of the type class and tagging them with implicit keyword
+
+TypeClass Interfaces
+Interface is any functionality we expose to users.
+Generic methods that accept instances of the type class as implicit parameters.
+There are two common ways of specifying an interface: Interface Objects and Interface Syntax.
+Interface Objects (singleton object).
+To use the object we import any type class instances we care about and call relevant method.
+Implicitly Method:
+Alternatively use extension methods to extend existing types with interface methods.
+Summons any value from implicit scope
+
+Implicit Scope
+Compiler searches for candidate type class instances by type (candidate instances in the implicit scope at the call site)
+Definitions are only included in implicit scope if they are tagged with implicit keyword
+If there are multiple you will get ambiguous implicit values error
+
+Recursive Implicit Resolution
+The power of type classes and implicits lies in compiler's ability to combine implicit definitions
+Instances can be:
+1. concrete instances as implicit vals
+2. implicit methods to construct instances from other type class instances
+Implicit resolution becomes a search through the space of possible combination of implicit definitions to find a combo that summons a type class instance of the correct overall type.
+When you create a type class instance constructor using an implicit def be sure to mar the parameters to the method as implicit parameters. Otherwise, the compiler won't be able to fill in parameters during implicit resolution.
+
